@@ -9,40 +9,6 @@
 
 'use strict';
 
-//  function doSomethingAsync(options, done) {
-//  
-//    var path = require('path'),
-//      robotJsonPath,
-//      compiler,
-//      Robot;
-//  
-//    robotJsonPath = path.resolve(options.rootPath, options.templateRoot);
-//    console.log(robotJsonPath, 'robotJsonPath');
-//  
-//    console.log('Start assembling template folder ' + options.templateRoot);
-//  
-//    Robot = require('robot');
-//  
-//  
-//    // Need to have a callbck fro Grunt done()
-//    Robot.prototype.compile = function (callback) {
-//      var self = this;
-//  
-//      this.__readSource(function () {
-//        console.log('Source file read complete.');
-//        self.__generateOutput(function (file) {
-//          console.log('Output file write complete.');
-//          if (typeof callback === 'function') {callback(); }
-//        });
-//      });
-//    };
-//  
-//  
-//    compiler = new Robot(robotJsonPath);
-//  
-//    compiler.compile(done);
-//  }
-
 module.exports = function (grunt) {
 
   // Please see the Grunt documentation for more information regarding task
@@ -53,11 +19,11 @@ module.exports = function (grunt) {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var error,
-      options = this.options(),
-      done = this.async();
-
-    //  doSomethingAsync(options, done);
-    var path = require('path'),
+      options = this.options({
+        templateRoot: 'robot'
+      }),
+      done = this.async(),
+      path = require('path'),
       robotJsonPath,
       compiler,
       Robot;
@@ -74,17 +40,19 @@ module.exports = function (grunt) {
       error = new Error('Lacking file ' + options.templateRoot + '/robot.json');
       grunt.fail.fatal(error);
     }
-    
-      
-    robotJsonPath = path.resolve(options.rootPath, options.templateRoot);
-    console.log(robotJsonPath, 'robotJsonPath');
+    ['data', 'layouts', 'partials', 'pages'].map(function (binding) {
+      if (!grunt.file.exists(options.templateRoot, 'source', binding)) {
+        error = new Error('The source/' + binding + ' folder is required');
+        grunt.fail.fatal(error);
+      }
+    });
 
+    robotJsonPath = path.resolve(options.rootPath, options.templateRoot);
     console.log('Start assembling template folder ' + options.templateRoot);
 
     Robot = require('robot');
 
-
-    // Need to have a callbck fro Grunt done()
+    // Need to have a callback for calling Grunt done()
     Robot.prototype.compile = function (callback) {
       var self = this;
 
@@ -97,11 +65,8 @@ module.exports = function (grunt) {
       });
     };
 
-
     compiler = new Robot(robotJsonPath);
-
     compiler.compile(done);
-
   });
 
 };
