@@ -38,5 +38,8 @@
   ],
   "readmeFilename": "README.md",
   "gitHead": "deaacbac9f3d2382afceec309581b135aabbf606",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "robot": "0.0.6"
+  }
 }
