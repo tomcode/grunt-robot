@@ -3,10 +3,7 @@
   "description": "Grunt task for Robot, a Mustache template HTML generator",
   "version": "0.1.0",
   "homepage": "https://github.com/tomcode/grunt-robot",
-  "author": {
-    "name": "Thomas Traub",
-    "email": "thomastraub2000@yahoo.de"
-  },
+  "author": "Thomas Traub <thomastraub2000@yahoo.de>",
   "repository": {
     "type": "git",
     "url": "git://github.com/tomcode/grunt-robot.git"
@@ -38,5 +35,8 @@
   },
   "keywords": [
     "gruntplugin"
-  ]
+  ],
+  "readmeFilename": "README.md",
+  "gitHead": "deaacbac9f3d2382afceec309581b135aabbf606",
+  "license": "MIT"
 }
