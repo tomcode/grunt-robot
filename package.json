@@ -1,7 +1,7 @@
 {
   "name": "grunt-robot",
   "description": "Grunt task for Robot, a Mustache template HTML generator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/tomcode/grunt-robot",
   "author": "Thomas Traub <thomastraub2000@yahoo.de>",
   "repository": {

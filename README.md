@@ -85,4 +85,5 @@ grunt.initConfig({
 ```
 
 ## Release History
-version 0.1.0 2013-03-16 First publication
+version 0.1.1 2013-03-16 Second try
+version 0.1.0 2013-03-16 First publication, broken !!
