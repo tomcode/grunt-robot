@@ -1,6 +1,6 @@
 # grunt-robot
 
-> Grunt task for Robot, a Mustache template HTML generator[D[C[C
+> Grunt task for Robot, a Mustache template HTML generator
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -11,7 +11,7 @@ If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out th
 npm install grunt-robot --save-dev
 ```
 
-One the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
 grunt.loadNpmTasks('grunt-robot');
