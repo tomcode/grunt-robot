@@ -32,10 +32,14 @@ module.exports = function(grunt) {
     robot: {
       default_options: {
         options: {
-          rootPatch: 'a pach'
         },
         files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123'],
+          'tmp/default_options': [
+            'test/fixtures/testing',
+            'test/fixtures/123',
+            'test/fixtures/source',
+            'test/fixtures/output',
+            ],
         },
       },
       custom_options: {

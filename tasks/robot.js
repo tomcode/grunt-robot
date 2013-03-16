@@ -16,6 +16,8 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('robot', 'Your task description goes here.', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
+      source: 'source/',
+      output: 'output/',
       punctuation: '.',
       separator: ', '
     });
