@@ -1,3 +1,4 @@
+/*jslint node:true */
 /*
  * grunt-robot
  * https://github.com/thomastraub/grunt-robot
@@ -6,73 +7,30 @@
  * Licensed under the MIT license.
  */
 
-'use strict';
+module.exports = function (grunt) {
 
-module.exports = function(grunt) {
+  'use strict';
 
   // Project configuration.
   grunt.initConfig({
     jshint: {
       all: [
         'Gruntfile.js',
-        'tasks/*.js',
-        '<%= nodeunit.tests %>',
+        'tasks/*.js'
       ],
       options: {
-        jshintrc: '.jshintrc',
-      },
-    },
-
-    // Before generating any new files, remove any previously-created files.
-    clean: {
-      tests: ['tmp'],
-    },
-
-    // Configuration to be run (and then tested).
-    robot: {
-      default_options: {
-        options: {
-        },
-        files: {
-          'tmp/default_options': [
-            'test/fixtures/testing',
-            'test/fixtures/123',
-            'test/fixtures/source',
-            'test/fixtures/output',
-            ],
-        },
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!',
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
-      },
-    },
-
-    // Unit tests.
-    nodeunit: {
-      tests: ['test/*_test.js'],
-    },
-
+        jshintrc: '.jshintrc'
+      }
+    }
   });
 
   // Actually load this plugin's task(s).
-  grunt.loadTasks('tasks');
+  //  grunt.loadTasks('tasks');
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-nodeunit');
-
-  // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-  // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'robot', 'nodeunit']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', ['jshint']);
 
 };

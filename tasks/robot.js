@@ -1,3 +1,4 @@
+/*jslint node: true, indent: 2, unparam: true, nomen: true */
 /*
  * grunt-robot
  * https://github.com/thomastraub/grunt-robot
@@ -8,45 +9,99 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+//  function doSomethingAsync(options, done) {
+//  
+//    var path = require('path'),
+//      robotJsonPath,
+//      compiler,
+//      Robot;
+//  
+//    robotJsonPath = path.resolve(options.rootPath, options.templateRoot);
+//    console.log(robotJsonPath, 'robotJsonPath');
+//  
+//    console.log('Start assembling template folder ' + options.templateRoot);
+//  
+//    Robot = require('robot');
+//  
+//  
+//    // Need to have a callbck fro Grunt done()
+//    Robot.prototype.compile = function (callback) {
+//      var self = this;
+//  
+//      this.__readSource(function () {
+//        console.log('Source file read complete.');
+//        self.__generateOutput(function (file) {
+//          console.log('Output file write complete.');
+//          if (typeof callback === 'function') {callback(); }
+//        });
+//      });
+//    };
+//  
+//  
+//    compiler = new Robot(robotJsonPath);
+//  
+//    compiler.compile(done);
+//  }
+
+module.exports = function (grunt) {
 
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('robot', 'Your task description goes here.', function() {
+
+  grunt.registerTask('robot', 'Generate HTML files from Mustache templates', function () {
+
     // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      source: 'source/',
-      output: 'output/',
-      punctuation: '.',
-      separator: ', '
-    });
+    var error,
+      options = this.options(),
+      done = this.async();
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
+    //  doSomethingAsync(options, done);
+    var path = require('path'),
+      robotJsonPath,
+      compiler,
+      Robot;
 
-      // Handle options.
-      src += options.punctuation;
+    if (!options.templateRoot) {
+      error = new Error('Missing option templateRoot');
+      grunt.fail.fatal(error);
+    }
+    if (!grunt.file.exists(options.templateRoot)) {
+      error = new Error('Cannot find the templateRoot folder in the project root');
+      grunt.fail.fatal(error);
+    }
+    if (!grunt.file.exists(options.templateRoot, 'robot.json')) {
+      error = new Error('Lacking file ' + options.templateRoot + '/robot.json');
+      grunt.fail.fatal(error);
+    }
+    
+      
+    robotJsonPath = path.resolve(options.rootPath, options.templateRoot);
+    console.log(robotJsonPath, 'robotJsonPath');
 
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
+    console.log('Start assembling template folder ' + options.templateRoot);
 
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
-    });
+    Robot = require('robot');
+
+
+    // Need to have a callbck fro Grunt done()
+    Robot.prototype.compile = function (callback) {
+      var self = this;
+
+      this.__readSource(function () {
+        console.log('Source file read complete.');
+        self.__generateOutput(function (file) {
+          console.log('Output file write complete.');
+          if (typeof callback === 'function') {callback(); }
+        });
+      });
+    };
+
+
+    compiler = new Robot(robotJsonPath);
+
+    compiler.compile(done);
+
   });
 
 };
