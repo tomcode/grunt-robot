@@ -5,6 +5,12 @@
 
 Allows the generation of HTML templates from a given folder structure.
 
+
+The Grunt integration is not complete, configuration is done in a separate .json file.
+
+The task comes without tests, haven't that figured out, yet.
+
+
 ````
 data/
 layouts/
