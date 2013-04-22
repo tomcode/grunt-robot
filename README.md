@@ -2,9 +2,7 @@
 
 > Grunt task for Robot, a Mustache template HTML generator
 
-
 Allows the generation of HTML templates from a given folder structure.
-
 
 The Grunt integration is not complete, configuration is done in a separate .json file.
 
@@ -84,6 +82,14 @@ grunt.initConfig({
 })
 ```
 
+## The Robot project
+
+The [Project Homepage](https://github.com/i-like-robots/robot)  
+The [npm package](https://npmjs.org/package/robot)
+
 ## Release History
+version 0.1.2 2013-04-22 Take out unused option rootPath, caused sometimes run errors, add links to Robot project
 version 0.1.1 2013-03-16 Second try
 version 0.1.0 2013-03-16 First publication, broken !!
+
+
