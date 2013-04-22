@@ -47,7 +47,7 @@ module.exports = function (grunt) {
       }
     });
 
-    robotJsonPath = path.resolve(options.rootPath, options.templateRoot);
+    robotJsonPath = path.resolve(options.templateRoot);
     console.log('Start assembling template folder ' + options.templateRoot);
 
     Robot = require('robot');
